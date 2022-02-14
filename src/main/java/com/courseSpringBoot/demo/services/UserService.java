@@ -18,7 +18,7 @@ public class UserService {
 
     public List<User> findAll(){ return userRepository.findAll(); }
 
-    public User findById(long id)
+    public User findByIdOrThrowBadRequestException(long id)
     {
         return userRepository
                 .findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST, "User not found"));
@@ -28,5 +28,12 @@ public class UserService {
 
     public User save(User user){ return userRepository.save(user); }
 
-    public void delete(long id) { userRepository.delete(findById(id)); }
+    public void replace(User user)
+    {
+        findByIdOrThrowBadRequestException(user.getId());
+        userRepository.save(user);
+    }
+
+    public void delete(long id) { userRepository.delete(findByIdOrThrowBadRequestException(id)); }
+
 }
