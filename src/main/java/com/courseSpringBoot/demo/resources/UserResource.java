@@ -1,13 +1,15 @@
 package com.courseSpringBoot.demo.resources;
 
 import com.courseSpringBoot.demo.DTO.UserDTO;
-import com.courseSpringBoot.demo.entities.User;
 import com.courseSpringBoot.demo.mapper.UserMapper;
 import com.courseSpringBoot.demo.requests.UserPostRequestBody;
 import com.courseSpringBoot.demo.services.UserService;
 import lombok.AllArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.stream.Collectors;
 
 
 @RestController
@@ -18,14 +20,38 @@ public class UserResource {
     private final UserService userService;
 
     @GetMapping
-    public ResponseEntity<Iterable<User>> findAll(){ return ResponseEntity.ok(userService.findAll()); }
+    public ResponseEntity<Iterable<UserDTO>> findAll(){
+
+        var usersDTO = userService
+                .findAll()
+                .stream()
+                .map(UserMapper.INSTANCE::toUserDTO)
+                .collect(Collectors.toList());
+
+        return ResponseEntity.ok(usersDTO);
+    }
+
+    @GetMapping(path = "/{id}")
+    public ResponseEntity<UserDTO> findById(@PathVariable long id)
+    {
+        var User = userService.findById(id);
+        var userToDTO = UserMapper.INSTANCE.toUserDTO(User);
+        return ResponseEntity.ok(userToDTO);
+    }
 
     @PostMapping
     public ResponseEntity<UserDTO> save(@RequestBody UserPostRequestBody userPostRequestBody){
-        var userToSave = UserMapper.INSTANCE.toUser(userPostRequestBody);
-        var savedUser = userService.save(userToSave);
+        var userToBeSaved = UserMapper.INSTANCE.toUser(userPostRequestBody);
+        var savedUser = userService.save(userToBeSaved);
         var userDTO = UserMapper.INSTANCE.toUserDTO(savedUser);
+
         return ResponseEntity.ok(userDTO);
     }
 
+    @DeleteMapping(path = "/{id}")
+    public ResponseEntity<Void> deleteById(@PathVariable long id)
+    {
+        userService.delete(id);
+        return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
+    }
 }
