@@ -1,12 +1,12 @@
 package com.courseSpringBoot.demo.DTO;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import com.courseSpringBoot.demo.entities.Order;
+import lombok.*;
 
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
+import java.util.List;
+
+@Getter
+@Setter
 public class UserDTO {
 
     private Long id;
@@ -14,5 +14,5 @@ public class UserDTO {
     private String email;
     private String phone;
     private String password;
-
+    private List<Order> orders;
 }

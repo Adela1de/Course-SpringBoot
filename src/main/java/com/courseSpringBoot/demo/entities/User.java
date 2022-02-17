@@ -1,8 +1,7 @@
 package com.courseSpringBoot.demo.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -11,21 +10,31 @@ import java.util.List;
 
 
 @NoArgsConstructor
-@Data
+@EqualsAndHashCode
 @Entity
 @Table(name = "tb_user")
 public class User implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Getter
+    @Setter
     private Long id;
+    @Getter
+    @Setter
     private String name;
+    @Getter
+    @Setter
     private String email;
+    @Getter
+    @Setter
     private String phone;
+    @Getter
+    @Setter
     private String password;
-
     @JsonIgnore
     @OneToMany(mappedBy = "client")
+    @Getter
     private List<Order> orders = new ArrayList<>();
 
     public User(Long id, String name, String email, String phone, String password) {

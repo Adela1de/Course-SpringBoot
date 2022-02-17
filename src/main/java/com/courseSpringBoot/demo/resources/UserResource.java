@@ -54,13 +54,13 @@ public class UserResource {
     {
         var userToBeReplaced = UserMapper.INSTANCE.toUser(userPutRequestBody);
         userService.replace(userToBeReplaced);
-        return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
     @DeleteMapping(path = "/{id}")
     public ResponseEntity<Void> deleteById(@PathVariable long id)
     {
         userService.delete(id);
-        return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 }
