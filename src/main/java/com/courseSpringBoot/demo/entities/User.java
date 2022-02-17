@@ -1,13 +1,14 @@
 package com.courseSpringBoot.demo.entities;
 
-import lombok.*;
-import org.springframework.lang.Nullable;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+@NoArgsConstructor
 @Data
 @Entity
 @Table(name = "tb_user")
@@ -23,9 +24,6 @@ public class User implements Serializable {
 
     @OneToMany(mappedBy = "client")
     private List<Order> orders = new ArrayList<>();
-
-    public User() {
-    }
 
     public User(Long id, String name, String email, String phone, String password) {
         this.id = id;
