@@ -23,6 +23,8 @@ public class OrderService {
     public Order findByIdOrElseThrowBadRequestException(Long id)
     {
         return orderRepository.
-                findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST, "Order not found!"));
+                findById(id).orElseThrow(
+                        () -> new ResponseStatusException(HttpStatus.BAD_REQUEST, "Order not found!")
+                );
     }
 }

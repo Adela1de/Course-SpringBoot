@@ -20,8 +20,9 @@ public class UserService {
 
     public User findByIdOrThrowBadRequestException(long id)
     {
-        return userRepository
-                .findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST, "User not found"));
+        return userRepository.findById(id).orElseThrow(
+                () -> new ResponseStatusException(HttpStatus.BAD_REQUEST, "User not found")
+        );
     }
 
     public Iterable<User> saveAll(Iterable<User> users) { return userRepository.saveAll(users); }

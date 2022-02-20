@@ -1,8 +1,10 @@
 package com.courseSpringBoot.demo.config;
 
+import com.courseSpringBoot.demo.entities.Category;
 import com.courseSpringBoot.demo.entities.Order;
 import com.courseSpringBoot.demo.entities.Product;
 import com.courseSpringBoot.demo.entities.User;
+import com.courseSpringBoot.demo.repositories.CategoryRepository;
 import com.courseSpringBoot.demo.repositories.OrderRepository;
 import com.courseSpringBoot.demo.repositories.ProductRepository;
 import com.courseSpringBoot.demo.services.UserService;
@@ -22,9 +24,14 @@ public class TestConfig implements CommandLineRunner {
     private final UserService userService;
     private final OrderRepository orderRepository;
     private final ProductRepository productRepository;
+    private final CategoryRepository categoryRepository;
 
     @Override
     public void run(String... args) throws Exception {
+
+        Category cat1 = new Category(null, "Electronics");
+        Category cat2 = new Category(null, "Books");
+        Category cat3 = new Category(null, "Computers");
 
         Product p1 = new Product(null,
                 "The Lord of the Rings",
@@ -52,7 +59,9 @@ public class TestConfig implements CommandLineRunner {
                 100.99,
                 "");
 
+        categoryRepository.saveAll(Arrays.asList(cat1, cat2, cat3));
         productRepository.saveAll(Arrays.asList(p1, p2, p3, p4, p5));
+
 
         User u1 = new User(null, "Maria Brown", "maria@gmail.com", "988888888", "123456");
 
