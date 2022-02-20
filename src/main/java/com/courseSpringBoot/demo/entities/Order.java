@@ -1,6 +1,7 @@
 package com.courseSpringBoot.demo.entities;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
@@ -25,6 +26,7 @@ public class Order implements Serializable {
     @ManyToOne
     @JoinColumn(name = "client_id")
     @Getter
+    @JsonIgnore
     private User client;
 
     public Order(Long id, Instant moment, User client) {
