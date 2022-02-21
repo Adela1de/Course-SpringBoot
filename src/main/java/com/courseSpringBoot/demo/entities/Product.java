@@ -7,6 +7,8 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @EqualsAndHashCode
@@ -32,6 +34,13 @@ public class Product implements Serializable {
     @Setter
     @EqualsAndHashCode.Exclude
     private String imgURL;
+    @ManyToMany
+    @JoinTable(name = "tb_product_category",
+            joinColumns = @JoinColumn(name = "product_id"),
+            inverseJoinColumns = @JoinColumn(name = "category_id")
+    )
+    @Getter
+    private List<Category> categories = new ArrayList<>();
 
     public Product(Long id, String name, String description, Double price, String imgURL) {
         this.id = id;

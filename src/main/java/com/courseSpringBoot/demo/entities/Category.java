@@ -1,5 +1,6 @@
 package com.courseSpringBoot.demo.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -7,6 +8,8 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 @NoArgsConstructor
 @EqualsAndHashCode
@@ -22,6 +25,9 @@ public class Category implements Serializable {
     @Getter
     @Setter
     private String name;
+    @JsonIgnore
+    @ManyToMany(mappedBy = "categories")
+    private List<Product> products = new ArrayList<>();
 
     public Category(Long id, String name) {
         this.id = id;
