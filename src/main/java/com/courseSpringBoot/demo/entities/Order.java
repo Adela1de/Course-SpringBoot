@@ -8,6 +8,8 @@ import lombok.*;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.Instant;
+import java.util.ArrayList;
+import java.util.List;
 
 @NoArgsConstructor
 @EqualsAndHashCode
@@ -31,6 +33,10 @@ public class Order implements Serializable {
     @Getter
     @JsonIgnore
     private User client;
+
+    @OneToMany(mappedBy = "id.order")
+    @Getter
+    private List<OrderItem> itens = new ArrayList<>();
 
     public Order(Long id, Instant moment, OrderStatus orderStatus, User client) {
         this.id = id;

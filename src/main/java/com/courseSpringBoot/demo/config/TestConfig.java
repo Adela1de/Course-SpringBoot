@@ -1,11 +1,9 @@
 package com.courseSpringBoot.demo.config;
 
-import com.courseSpringBoot.demo.entities.Category;
-import com.courseSpringBoot.demo.entities.Order;
-import com.courseSpringBoot.demo.entities.Product;
-import com.courseSpringBoot.demo.entities.User;
+import com.courseSpringBoot.demo.entities.*;
 import com.courseSpringBoot.demo.entities.enums.OrderStatus;
 import com.courseSpringBoot.demo.repositories.CategoryRepository;
+import com.courseSpringBoot.demo.repositories.OrderItemRepository;
 import com.courseSpringBoot.demo.repositories.OrderRepository;
 import com.courseSpringBoot.demo.repositories.ProductRepository;
 import com.courseSpringBoot.demo.services.UserService;
@@ -26,6 +24,7 @@ public class TestConfig implements CommandLineRunner {
     private final OrderRepository orderRepository;
     private final ProductRepository productRepository;
     private final CategoryRepository categoryRepository;
+    private final OrderItemRepository orderItemRepository;
 
     @Override
     public void run(String... args) throws Exception {
@@ -82,5 +81,12 @@ public class TestConfig implements CommandLineRunner {
 
         userService.saveAll(Arrays.asList(u1, u2));
         orderRepository.saveAll(Arrays.asList(o1, o2, o3));
+
+        OrderItem oi1 = new OrderItem(o1, p1, 2, p1.getPrice());
+        OrderItem oi2 = new OrderItem(o1, p3, 1, p3.getPrice());
+        OrderItem oi3 = new OrderItem(o2, p3, 2, p3.getPrice());
+        OrderItem oi4 = new OrderItem(o3, p5, 2, p5.getPrice());
+
+        orderItemRepository.saveAll(Arrays.asList(oi1, oi2, oi3, oi4));
     }
 }

@@ -19,11 +19,11 @@ public class OrderItemPK implements Serializable {
     @Setter
     @ManyToOne
     @JoinColumn(name = "order_id")
-    private Product product;
+    private Order order;
     @Getter
     @Setter
     @ManyToOne
     @JoinColumn(name = "product_id")
-    private Order order;
+    private Product product;
 
 }
