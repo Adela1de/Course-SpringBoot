@@ -28,14 +28,15 @@ public class Order implements Serializable {
     private Instant moment;
     @EqualsAndHashCode.Exclude
     private Integer orderStatus;
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "client_id")
     @Getter
-    @JsonIgnore
     private User client;
 
     @OneToMany(mappedBy = "id.order")
     @Getter
+    @JsonIgnore
     private List<OrderItem> itens = new ArrayList<>();
 
     public Order(Long id, Instant moment, OrderStatus orderStatus, User client) {

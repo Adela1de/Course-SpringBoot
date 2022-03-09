@@ -1,6 +1,7 @@
 package com.courseSpringBoot.demo.entities;
 
 import com.courseSpringBoot.demo.entities.pk.OrderItemPK;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -36,6 +37,9 @@ public class OrderItem implements Serializable {
         this.price = price;
     }
 
+    public OrderItemPK getId() { return id; }
+
+    @JsonIgnore
     public Order getOrder()
     {
         return id.getOrder();

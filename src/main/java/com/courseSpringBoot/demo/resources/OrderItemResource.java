@@ -22,7 +22,12 @@ public class OrderItemResource {
     public ResponseEntity<Iterable<OrderItemDTO>> findAll()
     {
         var orderItems = orderItemService.findAll();
-        var orderItemsDTO = orderItems.stream().map(OrderItemMapper.INSTANCE::orderItemDTO).collect(Collectors.toList());
+        var orderItemsDTO =
+                orderItems.
+                stream().
+                map(OrderItemMapper.INSTANCE::orderItemDTO).
+                collect(Collectors.toList());
+
         return ResponseEntity.ok(orderItemsDTO);
     }
 }
