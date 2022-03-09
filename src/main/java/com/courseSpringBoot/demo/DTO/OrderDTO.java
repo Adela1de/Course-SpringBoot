@@ -19,5 +19,6 @@ public class OrderDTO {
     private OrderStatus orderStatus;
     @JsonIgnore
     private User client;
+
     private List<OrderItem> itens;
 }

@@ -1,5 +1,6 @@
 package com.courseSpringBoot.demo.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -42,6 +43,9 @@ public class Product implements Serializable {
     @Getter
     private List<Category> categories = new ArrayList<>();
 
+    @OneToMany(mappedBy = "id.product")
+    private List<OrderItem> itens = new ArrayList<>();
+
     public Product(Long id, String name, String description, Double price, String imgURL) {
         this.id = id;
         this.name = name;
@@ -50,5 +54,15 @@ public class Product implements Serializable {
         this.imgURL = imgURL;
     }
 
+    @JsonIgnore
+    public List<Order> getOrders()
+    {
+        List<Order> order = new ArrayList<>();
+        for(OrderItem x : itens)
+        {
+            order.add(x.getOrder());
+        }
+        return order;
+    }
 
 }
