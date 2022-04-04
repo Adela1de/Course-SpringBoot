@@ -11,4 +11,5 @@ public class OrderItemDTO {
     private OrderItemPK id;
     private Integer quantity;
     private Double price;
+    private Double subTotal;
 }

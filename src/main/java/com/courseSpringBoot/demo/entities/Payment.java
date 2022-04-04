@@ -1,5 +1,6 @@
 package com.courseSpringBoot.demo.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -26,6 +27,7 @@ public class Payment implements Serializable {
     @OneToOne
     @MapsId
     @EqualsAndHashCode.Exclude
+    @JsonIgnore
     private Order order;
 
     public Payment(Long id, Instant moment, Order order)

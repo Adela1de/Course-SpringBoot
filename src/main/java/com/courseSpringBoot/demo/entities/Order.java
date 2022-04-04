@@ -51,10 +51,20 @@ public class Order implements Serializable {
         this.client = client;
     }
 
+    public Double getTotal()
+    {
+        var soma = 0.0;
+        for (OrderItem iten: itens) {
+            soma += iten.getSubTotal();
+        }
+        return soma;
+    }
+
     public OrderStatus getOrderStatus() { return OrderStatus.valueOf(orderStatus); }
 
     public void setOrderStatus(OrderStatus orderStatus)
     {
         if(orderStatus != null) this.orderStatus = orderStatus.getCode();
     }
+
 }
