@@ -46,7 +46,7 @@ public class UserResource {
         var savedUser = userService.save(userToBeSaved);
         var userDTO = UserMapper.INSTANCE.toUserDTO(savedUser);
 
-        return ResponseEntity.ok(userDTO);
+        return new ResponseEntity<UserDTO>(userDTO, HttpStatus.CREATED);
     }
 
     @PutMapping
