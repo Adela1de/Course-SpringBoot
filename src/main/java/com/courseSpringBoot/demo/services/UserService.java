@@ -31,10 +31,18 @@ public class UserService {
 
     public void replace(User user)
     {
-        findByIdOrThrowBadRequestException(user.getId());
-        userRepository.save(user);
+        var entity = userRepository.getById(user.getId());
+        updateData(entity, user);
+        userRepository.save(entity);
     }
 
     public void delete(long id) { userRepository.delete(findByIdOrThrowBadRequestException(id)); }
+
+    public void updateData(User entity, User user)
+    {
+        entity.setName(user.getName());
+        entity.setEmail(user.getEmail());
+        entity.setPhone(user.getPhone());
+    }
 
 }
